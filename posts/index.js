@@ -37,7 +37,13 @@ app.post('/posts', async(req,res) =>{
 }); 
 
 
-app.listen(4005, () => {
+app.post('/events', (req, res) => {
+    console.log('Event received:', req.body.type);
+    res.send({}); // Acknowledge the event
+}
+);
+
+app.listen(4000, () => {
   console.log('Server is running on port 4000');
 });
 
