@@ -14,7 +14,7 @@ app.get('/posts', (req, res) => {
 )
 
 
-app.get('events', (req, res) => {   
+app.post('/events', (req, res) => {   
   const {type, data} = req.body;    
 
     if (type === 'PostCreated') {   
@@ -22,7 +22,7 @@ app.get('events', (req, res) => {
         const { id, title } = data;    
         posts[id] = { id, title };    
     }
-    if (type === 'CommentsCreaye') {   
+    if (type === 'CommentsCreated') {   
         const { id, content, postId } = data;    
         const post = posts[postId];    
         post.comments.push ({ id, content });
@@ -30,10 +30,18 @@ app.get('events', (req, res) => {
     }   
 }   )
 
+
+app.post('/events', (req, res) => {
+    console.log('Event received:', req.body.type);
+    res.send({}); // Acknowledge the event
+  }
+  );
+
 app.listen(4002, () => {    
-    console.log('Server is running on port 4000');
+    console.log('Server is running on posrt  4002');
 }   
 )
+
 
 
 
