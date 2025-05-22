@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-email-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-email
+  template:
+    metadata:
+      labels:
+        app: client-email
+    spec:
+      containers:
+      - name: client-email
+        image: ymonterom22/client-email
+        ports:
+        - containerPort: 4001
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-email-srv
+spec:
+  selector:
+    app: client-email-srv
+  ports:
+    - protocol: TCP
+      port: 4001
+      targetPort: 4001
+
+
+
